@@ -70,6 +70,7 @@
             var videoView = document.getElementById('videoView');
             videoView.style.visibility = 'hidden';
             videoView.classList.remove('classname');
+            videoView.removeEventListener('animationend', makeContentVisible);
             document.getElementById('content').style.visibility = 'hidden';
         }
 
@@ -78,8 +79,12 @@
 
             videoView.style.visibility = 'visible';
             videoView.classList.add('classname');
-            videoView.addEventListener('animationend', () => document.getElementById('content').style.visibility = 'visible');
+            videoView.addEventListener('animationend', makeContentVisible);
             document.getElementById('message').textContent = message;
+        }
+
+        function makeContentVisible() {
+            document.getElementById('content').style.visibility = 'visible';
         }
     </script>
 
