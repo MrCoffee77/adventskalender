@@ -1,1 +1,103 @@
 <!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div.classname {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation-name: example;
+            animation-duration: 4s;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        div.day {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+        }
+        
+        @keyframes example {
+            0% {
+                background-color: red;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 0px;
+                height: 0px;
+            }
+            25% {
+                background-color: yellow;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 25px;
+                height: 25px
+            }
+            50% {
+                background-color: blue;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 50px;
+                height: 50px
+            }
+            75% {
+                background-color: green;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 75px;
+                height: 75px
+            }
+            100% {
+                background-color: red;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100px;
+                height: 100px
+            }
+        }
+    </style>
+    <script>
+        function closeVideoView() {
+            var videoView = document.getElementById('videoView');
+            videoView.style.visibility = 'hidden';
+            videoView.classList.remove('classname');
+            document.getElementById('content').style.visibility = 'hidden';
+        }
+
+        function openVideoView(message) {
+            var videoView = document.getElementById('videoView');
+
+            videoView.style.visibility = 'visible';
+            videoView.classList.add('classname');
+            videoView.addEventListener('animationend', () => document.getElementById('content').style.visibility = 'visible');
+            document.getElementById('message').textContent = message;
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.
+    </p>
+
+    <div id="videoView" style="position: fixed;">
+        <div id="content" style="visibility: hidden;">
+            <div id="message"></div><a href="javascript:closeVideoView();">Close</a></div>
+    </div>
+    <div class="day"><a href="javascript:openVideoView('Eins');">1</a></div>
+    <div class="day"><a href="javascript:openVideoView('Zwei');">2</a></div>
+
+
+</body>
+
+</html>
