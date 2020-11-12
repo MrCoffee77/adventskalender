@@ -3,23 +3,39 @@
 
 <head>
     <style>
+        body {
+            background-color: #C0E1FF !important;
+            background-image: url('./snow1.png'), url('./snow2.png'), url('./snow3.png');
+            animation: schnee 25s linear infinite;
+        }
+        
+        @keyframes schnee {
+            0% {
+                background-position: 0px 0px, 0px 0px, 0px 0px
+            }
+            100% {
+                background-position: 500px 1000px, 400px 400px, 300px 300px
+            }
+        }
+        
         div.classname {
-            width: 100px;
-            height: 100px;
+            width: 75vw;
             background-color: red;
             animation-name: example;
             animation-duration: 4s;
             position: fixed;
+            padding-top: 42vw;
+            /* 16:9 Aspect Ratio */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
         
         div.day {
-            width: 100px;
-            height: 100px;
+            float: left;
+            width: 150px;
+            height: 150px;
             background-color: red;
-            position: relative;
         }
         
         @keyframes example {
@@ -28,40 +44,16 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 0px;
-                height: 0px;
-            }
-            25% {
-                background-color: yellow;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 25px;
-                height: 25px
-            }
-            50% {
-                background-color: blue;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 50px;
-                height: 50px
-            }
-            75% {
-                background-color: green;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 75px;
-                height: 75px
+                width: 8vw;
+                padding-top: 4vw;
             }
             100% {
                 background-color: red;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 100px;
-                height: 100px
+                width: 75vw;
+                padding-top: 42vw;
             }
         }
     </style>
@@ -99,7 +91,11 @@
         <div id="content" style="visibility: hidden;">
             <div id="message"></div><a href="javascript:closeVideoView();">Close</a></div>
     </div>
-    <div class="day"><a href="javascript:openVideoView('Eins');">1</a></div>
+    <div class="day">
+        <a href="javascript:openVideoView('Eins');">
+            <img src="GoldTypography2.svg" height="60%"><img src="GoldTypography4.svg" height="60%">
+        </a>
+    </div>
     <div class="day"><a href="javascript:openVideoView('Zwei');">2</a></div>
 
 
