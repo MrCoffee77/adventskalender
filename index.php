@@ -49,8 +49,9 @@
         @media screen and (orientation: portrait) { 
             div.day {
             float: left;
-            width: 200px;
-            height: 200px;
+            width: 22vw;
+            height: 13vh;
+            /*height: 200px;*/
             background-color: red;
             align-items: center;
             justify-content: center;
@@ -58,23 +59,32 @@
             border: 2px solid black;
             border-radius: 25px;
             margin: 10px;
+            }
+
+            img.number {
+                height:6vh;
+            }            
+
         }
 
-         }
+        @media screen and (orientation: landscape) {         
+            div.day {
+                float: left;
+                width: 13vw;
+                height: 18vh;
+                background-color: red;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                border: 2px solid black;
+                border-radius: 25px;
+                margin: 10px;
+            }
 
-@media screen and (orientation: landscape) {         div.day {
-            float: left;
-            width: 200px;
-            height: 200px;
-            background-color: red;
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            border: 2px solid black;
-            border-radius: 25px;
-            margin: 10px;
-        }
- }        
+            img.number {
+                height:12vh;
+            }
+        }        
         
         @keyframes example {
             0% {
@@ -147,11 +157,11 @@
                 <?php
                     if ($i>9) {
                 ?>
-                <img src="GoldTypography<?=intdiv($i,10)?>.svg" height="90px">
+                <img class="number" src="GoldTypography<?=intdiv($i,10)?>.svg">
                 <?php
                     }
                 ?>
-                <img src="GoldTypography<?=$i%10?>.svg" height="90px">
+                <img class="number" src="GoldTypography<?=$i%10?>.svg">
             </div>
         </a>
 
