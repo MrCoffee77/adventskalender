@@ -17,6 +17,17 @@
                 background-position: 500px 1000px, 400px 400px, 300px 300px
             }
         }
+        .content {
+            max-width: 98vw;
+            margin: auto;
+        }
+
+        .header img {
+
+            margin: auto;
+            justify-content: center;
+            height: 10vh;
+        }
         
         div.classname {
             width: 75vw;
@@ -31,6 +42,9 @@
             transform: translate(-50%, -50%);
             align-content: center;
             display: flex;
+            border: 2px solid black;
+            border-radius: 25px;
+
         }
         
         div.content {
@@ -113,6 +127,10 @@
             videoView.classList.remove('classname');
             videoView.removeEventListener('animationend', makeContentVisible);
             document.getElementById('content').style.visibility = 'hidden';
+            var videoplayer=document.getElementById('player');
+            if (videoplayer!=null) {
+                videoplayer.pause();
+            }
             //document.getElementById('videoView').innerHTML='';
         }
 
@@ -122,6 +140,19 @@
             videoView.style.visibility = 'visible';
             videoView.style.display= 'flex';
             videoView.classList.add('classname');
+            const Http = new XMLHttpRequest();
+            const url='./content.php?day='+message;
+            Http.open("GET", url);
+            Http.send();
+
+            Http.onreadystatechange = (e) => {
+                console.log("statechanged"+e)
+                //if (e.status == 200 ) {
+
+                    document.getElementById('content').innerHTML=Http.responseText;
+                    console.log(Http.responseText)
+                //}
+            }
             videoView.addEventListener('animationend', makeContentVisible);
         }
 
@@ -129,25 +160,29 @@
             //document.getElementById('videoView').innerHTML = '<img src="SantaPig.svg" id="pig" height="50%" width="50%"><h1>Wer ist denn hier so neugierig?</h1><a href="javascript:closeVideoView();">Close</a>';
           //  document.getElementById('pig').style.top=0;
             document.getElementById('content').style.visibility = 'visible';
+            var videoplayer=document.getElementById('player');
+            if (videoplayer!=null) {
+                videoplayer.play();
+            }
         }
     </script>
 
 </head>
 
 <body>
-
-    <p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.
-    </p>
+        <div class="center" >
+        <div class="header" align="center"><img src="RethenRockt_1024.jpg"></div>
 
     <div id="videoView" style="display:none">
-    <div id="content">
-    <img src="SantaPig.svg" id="pig" height="50%" width="50%" style="position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);">
-    <h1 style="position:fixed;bottom: 10%;left: 50%;transform: translate(-50%, -50%);">Wer ist denn hier so neugierig?</h1>
-    <a href="javascript:closeVideoView();"><h1 style="position:fixed;top: 0%;right: 0%;transform: translate(-50%, -50%);">X</h1></a>
+    <div id="content" style="visibility: hidden;">
+
     </div>
     </div>
+    <div>
     <?php
-        for ($i=1;$i<25;$i++) {
+    $days=range(1,24);
+    shuffle($days);
+        foreach ($days as $i) {
 
     ?>
     <div class="day">
@@ -170,8 +205,8 @@
         }
     ?>
     
-
-
+    </div>
+        </div>
 </body>
 
 </html>
