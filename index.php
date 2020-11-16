@@ -9,6 +9,12 @@
             /*animation: schnee 25s linear infinite;*/
         }
         
+        body.animation {
+            background-color: #C0E1FF !important;
+            background-image: url('./snow1.png'), url('./snow2.png'), url('./snow3.png');
+            animation: schnee 25s linear infinite;
+        }
+
         @keyframes schnee {
             0% {
                 background-position: 0px 0px, 0px 0px, 0px 0px
@@ -43,6 +49,7 @@
 
         @keyframes example {
             0% {
+                opacity: 0;
                 position: fixed;
                 background-color: red;
                 top: 50%;
@@ -53,6 +60,7 @@
                 z-index: 2;
             }
             100% {
+                opacity: 1;
                 position: fixed;
                 background-color: red;
                 top: 50%;
@@ -245,6 +253,7 @@
 
 <body>
         <div class="header"><img src="RethenRockt_1024.jpg"></div>
+        <div style="top:0%;left=0%;"><a href="javascript:document.body.classList.add('animation');">Let it Snow!</a></div>
         <div class="center" >
 
         
