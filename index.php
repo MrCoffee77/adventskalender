@@ -40,6 +40,29 @@
             z-index: 2;
 
         }
+
+        @keyframes example {
+            0% {
+                position: fixed;
+                background-color: red;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 8vw;
+                padding-top: 4vw;
+                z-index: 2;
+            }
+            100% {
+                position: fixed;
+                background-color: red;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 75vw;
+                padding-top: 42vw;
+                z-index: 2;
+            }
+        }
         
         div.content {
             visibility: hidden;
@@ -143,46 +166,33 @@
             }
         }        
         
-        @keyframes example {
-            0% {
-                background-color: red;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 8vw;
-                padding-top: 4vw;
-            }
-            100% {
-                background-color: red;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 75vw;
-                padding-top: 42vw;
-            }
-        }
+
     </style>
     <script>
+        var curVideoElem=null;
+
         function closeVideoView() {
-            var videoView = document.getElementById('videoView');
-            videoView.style.visibility = 'hidden';
-            videoView.style.display= 'none';
-            videoView.classList.remove('classname');
-            videoView.removeEventListener('animationend', makeContentVisible);
-            document.getElementById('content').style.visibility = 'hidden';
             var videoplayer=document.getElementById('player');
             if (videoplayer!=null) {
                 videoplayer.pause();
+                log('player pause');
+
             }
-            //document.getElementById('videoView').innerHTML='';
+            log('curVideoElem'+curVideoElem);
+            if (curVideoElem!=null) {
+                document.body.removeChild(curVideoElem);
+                curVideoElem=null;
+                log('childRemoved');
+            }
+        }
+
+        function log(message) {
+            //document.getElementById('log').innerText+=new Date() + message+'\n';
+
         }
 
         function openVideoView(message) {
-            var videoView = document.getElementById('videoView');
-
-            videoView.style.visibility = 'visible';
-            videoView.style.display= 'flex';
-            videoView.classList.add('classname');
+            createElementInBody();
             const Http = new XMLHttpRequest();
             const url='./content.php?day='+message;
             Http.open("GET", url);
@@ -193,21 +203,42 @@
                 //if (e.status == 200 ) {
 
                     document.getElementById('content').innerHTML=Http.responseText;
+                    log('content');
                     
                 //}
             }
-            videoView.addEventListener('animationend', makeContentVisible);
+
+        }
+
+        function createElementInBody() {
+            if (curVideoElem!=null) {
+                document.body.removeChild(curVideoElem);
+            }
+            curVideoElem=document.createElement('div');
+            curVideoElem.style.visibility = 'visible';
+            curVideoElem.style.display= 'flex';
+            curVideoElem.classList.add('classname');
+            curVideoElem.addEventListener('animationend', makeContentVisible);
+            var content=document.createElement('div');
+            content.id='content';
+            content.style.visibility='hidden';
+            curVideoElem.appendChild(content);
+            document.body.appendChild(curVideoElem);
+
         }
 
         function makeContentVisible() {
-            //document.getElementById('videoView').innerHTML = '<img src="SantaPig.svg" id="pig" height="50%" width="50%"><h1>Wer ist denn hier so neugierig?</h1><a href="javascript:closeVideoView();">Close</a>';
-          //  document.getElementById('pig').style.top=0;
             document.getElementById('content').style.visibility = 'visible';
+            log('content visible');
             var videoplayer=document.getElementById('player');
             if (videoplayer!=null) {
                 videoplayer.play();
+                log('play');
+
             }
         }
+       
+
     </script>
 
 </head>
@@ -216,10 +247,8 @@
         <div class="header"><img src="RethenRockt_1024.jpg"></div>
         <div class="center" >
 
-    <div id="videoView" style="display:none">
-    <div id="content" style="visibility: hidden;">
+        
 
-    </div>
     </div>
     <div>
     <?php
@@ -249,6 +278,8 @@
     ?>
     
     </div>
+    <pre id="log">
+    </pre>
     <div style="bottom:0%;left:50%;transform: translate(-20%, -00%);position:fixed">
     <a href="https://rethenrockt.de/index.php/impressum">Impressum</a>
     </div>
