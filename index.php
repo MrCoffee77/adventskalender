@@ -6,7 +6,7 @@
         body {
             background-color: #C0E1FF !important;
             background-image: url('./snow1.png'), url('./snow2.png'), url('./snow3.png');
-            animation: schnee 25s linear infinite;
+            /*animation: schnee 25s linear infinite;*/
         }
         
         @keyframes schnee {
@@ -17,17 +17,10 @@
                 background-position: 500px 1000px, 400px 400px, 300px 300px
             }
         }
-        .content {
-            max-width: 98vw;
-            margin: auto;
-        }
 
-        .header img {
 
-            margin: auto;
-            justify-content: center;
-            height: 10vh;
-        }
+
+
         
         div.classname {
             width: 75vw;
@@ -44,6 +37,7 @@
             display: flex;
             border: 2px solid black;
             border-radius: 25px;
+            z-index: 2;
 
         }
         
@@ -61,31 +55,28 @@
             transform: translate(-50%, -50%);
         }
         @media screen and (orientation: portrait) { 
-            div.day {
-            float: left;
-            width: 22vw;
-            height: 13vh;
-            /*height: 200px;*/
-            background-color: red;
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            border: 2px solid black;
-            border-radius: 25px;
-            margin: 10px;
+            div.center {
+                width: 99vw;
+                margin-top: 10vh;
+                float: left;
+                position: relative;
+                margin-left: 5vw;
+                margin-right: 5vw;
             }
+            div.header {
+                position: fixed;
+                justify-content: center;
+                top: 0%;
+                left: 50%;
+                transform: translate(-45%, 0%);
+                width: 50vw;
 
-            img.number {
-                height:6vh;
-            }            
-
-        }
-
-        @media screen and (orientation: landscape) {         
+            }
             div.day {
                 float: left;
-                width: 13vw;
-                height: 18vh;
+                width: 19vw;
+                height: 10vh;
+                /*height: 200px;*/
                 background-color: red;
                 align-items: center;
                 justify-content: center;
@@ -96,7 +87,59 @@
             }
 
             img.number {
-                height:12vh;
+                height:5vh;
+            }            
+
+            .header img {
+                position: relative;
+               height: 7vh;
+            }
+        }
+
+        @media screen and (orientation: landscape) {         
+            div.center {
+                width: 99vw;
+                margin-top: 10vh;
+                float: left;
+                position: relative;
+                margin-left: 5vw;
+                margin-right: 5vw;
+            }
+            div.header {
+                position: fixed;
+                justify-content: center;
+                top: 0%;
+                left: 50%;
+                transform: translate(-20%, 0%);
+                width: 50vw;
+
+            }
+
+            .header img {
+                height: 10vh;
+            }
+            div.day {
+                
+                width: 12vw;
+                height: 15vh;
+                background-color: red;
+                align-items: center;
+                justify-content: center;
+                display: inline-block;
+                border: 2px solid black;
+                border-radius: 25px;
+                margin: 10px;
+            }
+
+            div.number {
+                position: relative;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            img.number {
+                height:8vh;
+                position: relative;
             }
         }        
         
@@ -150,7 +193,7 @@
                 //if (e.status == 200 ) {
 
                     document.getElementById('content').innerHTML=Http.responseText;
-                    console.log(Http.responseText)
+                    
                 //}
             }
             videoView.addEventListener('animationend', makeContentVisible);
@@ -170,8 +213,8 @@
 </head>
 
 <body>
+        <div class="header"><img src="RethenRockt_1024.jpg"></div>
         <div class="center" >
-        <div class="header" align="center"><img src="RethenRockt_1024.jpg"></div>
 
     <div id="videoView" style="display:none">
     <div id="content" style="visibility: hidden;">
@@ -188,7 +231,7 @@
     <div class="day">
 
         <a href="javascript:openVideoView('<?=$i?>');">
-            <div>
+            <div class="number" align="center">
                 <?php
                     if ($i>9) {
                 ?>
@@ -205,6 +248,9 @@
         }
     ?>
     
+    </div>
+    <div style="bottom:0%;left:50%;transform: translate(-20%, -00%);position:fixed">
+    <a href="https://rethenrockt.de/index.php/impressum">Impressum</a>
     </div>
         </div>
 </body>

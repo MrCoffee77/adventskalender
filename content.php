@@ -1,11 +1,12 @@
 <?php
  $day=$_GET["day"];
- if ($day==15) {
+ $date=strtotime("11/$day/2020");
+ if ($date<strtotime("now")) {
 ?>
-<audio controls preload="metadata" style=" width:300px;" id="player"> <!-- autoplay -->
-	<source src="Westerland.mp3" type="audio/mpeg">
+<video controls preload="metadata" style=" width:70vw;position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);" id="player"> <!-- autoplay -->
+	<source src="Feuerwehr3.mp4" type="video/mp4">
 	Your browser does not support the audio element.
-</audio>
+</video>
 <?php
  }
  else {
